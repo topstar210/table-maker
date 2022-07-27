@@ -45,29 +45,29 @@
 
 	<div class="container-fluid">
 		<div class="row p-2">
+			<div class="doc-control-section">
+				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inHeader" title="HEADER">
+					<i class="fa fa-plus"></i> <span>HEADER</span>
+				</button>
+				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inBody" title="BODY">
+					<i class="fa fa-plus"></i> <span>BODY</span>
+				</button>
+				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inFooter" title="FOOTER">
+					<i class="fa fa-plus"></i> <span>FOOTER</span>
+				</button>
+				<button class="btn btn-dark btn-lg mt-3" id="upload_image" title="Change Image">
+					<i class="fa fa-edit"></i> <span>Change Image</span>
+				</button>
+				<input type="file" id="fileElem" accept="image/*" style="display:none">
+			</div>
 			<div class="main-side col-lg-8 mb-2" id="tb_source">
 				<div class="text-center" style="width: 100%;">
 					<div class="doc-container">
 						<div class="doc-header table-container" target_id="doc-header">
-							<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inHeader">
-								<i class="fa fa-plus"></i> HEADER
-							</button>
 						</div>
 						<div class="doc-body table-container" target_id="doc-body">
-							<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inBody">
-								<i class="fa fa-plus"></i> BODY
-							</button>
 						</div>
 						<div class="doc-footer table-container" target_id="doc-footer">
-							<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inFooter">
-								<i class="fa fa-plus"></i> FOOTER
-							</button>
-						</div>
-						<div class="background-chage-section">
-							<button class="btn btn-dark btn-lg mt-3" id="upload_image">
-								<i class="fa fa-edit"></i> Change Image
-							</button>
-							<input type="file" id="fileElem" accept="image/*" style="display:none">
 						</div>
 					</div>
 					<img id="doc-background" src="./assets/images/AM21-280.png" />

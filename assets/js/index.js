@@ -14,5 +14,13 @@ $(document).ready(function(){
       const selectedTable = $(this).parents("tbody");
       selectedTable.append(trStr);
     }
-	})
+	});
+
+  $(document).on("mouseover mouseleave", ".doc-control-section>button", function(e){
+    if(e.type == "mouseleave"){
+      $(this).find("span").hide();
+    } else {
+      $(this).find("span").show();
+    }
+  })
 })

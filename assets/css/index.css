@@ -19,6 +19,17 @@ html,body{
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
   padding:3px 3px 3px 5px;
 }
+.doc-control-section {
+  position:fixed;
+  width: fit-content;
+  z-index: 10;
+}
+.doc-control-section>button {
+  display: block;
+}
+.doc-control-section>button span {
+  display: none;
+}
 
 /* Start main-side style */
 .main-side {
@@ -29,7 +40,7 @@ html,body{
 .main-side div.doc-container {
   position: absolute;
   width: calc(100% - 23px);
-  z-index: 10;
+  z-index: 5;
 }
 .main-side .table {
   background-color: transparent;

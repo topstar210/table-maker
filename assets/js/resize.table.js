@@ -43,9 +43,6 @@ const createResizable = function (dom, flag) {
     const mouseMoveHandler = function (e) {
         if(flag === "C") {
             const diffX = e.clientX*1 - x*1;
-            // const domWidth = `${w + diffX}px`;
-            // console.log(x, w, "mouseMove", e.clientX, diffX, domWidth);
-            // dom.style.width = `${w + diffX}px`;
             const domInd = $(dom).attr('ind');
             const tds = $("." + currDoc + " .table tr").find('td[ind='+domInd+']');
             tds.width(w + diffX);

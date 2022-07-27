@@ -22,5 +22,6 @@ $(document).ready(function(){
     } else {
       $(this).find("span").show();
     }
-  })
+  });
+  
 })

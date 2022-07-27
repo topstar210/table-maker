@@ -46,34 +46,23 @@
 	<div class="container-fluid">
 		<div class="row p-2">
 			<div class="doc-control-section">
-				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inHeader" title="HEADER">
-					<i class="fa fa-plus"></i> <span>HEADER</span>
-				</button>
-				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inBody" title="BODY">
-					<i class="fa fa-plus"></i> <span>BODY</span>
-				</button>
-				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inFooter" title="FOOTER">
-					<i class="fa fa-plus"></i> <span>FOOTER</span>
+				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inDoc">
+					<i class="fa fa-plus"></i> <span>Add Table</span>
 				</button>
 				<button class="btn btn-dark btn-lg mt-3" id="upload_image" title="Change Image">
 					<i class="fa fa-edit"></i> <span>Change Image</span>
 				</button>
 				<input type="file" id="fileElem" accept="image/*" style="display:none">
 			</div>
-			<div class="main-side col-lg-8 mb-2" id="tb_source">
+			<!-- <div class="main-side col-lg-8 mb-2" id="tb_source"> -->
+			<div class="main-side col-lg-12 mb-2" id="tb_source">
 				<div class="text-center" style="width: 100%;">
 					<div class="doc-container">
-						<div class="doc-header table-container" target_id="doc-header">
-						</div>
-						<div class="doc-body table-container" target_id="doc-body">
-						</div>
-						<div class="doc-footer table-container" target_id="doc-footer">
-						</div>
 					</div>
-					<img id="doc-background" src="./assets/images/AM21-280.png" />
+					<img id="doc-background" src="./assets/images/default_bg.png" />
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4" style="display: none;">
 				<pre class="demo-code">
 					<xmp class="block-markdown__pre">SOURCE CODE</xmp>
 				</pre>
@@ -115,17 +104,17 @@
 								</td>
 							</tr>
 							<tr>
-								<td>TABLE HEIGHT</td>
+								<td>ROW HEIGHT</td>
 								<td class="input-td">
-									<input type="number" min="0" id="table_height" />
+									<input type="number" min="0" value="28" id="table_height" />
 								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>TABLE WIDTH</td>
 								<td class="input-td">
 									<input type="number" min="0" id="table_width" />
 								</td>
-							</tr>
+							</tr> -->
 							<!-- <tr>
 								<td>HEADER COLOR</td>
 								<td class="input-td">
@@ -135,13 +124,18 @@
 							<tr>
 								<td>BORDER COLOR</td>
 								<td class="input-td">
-									<input type="text" min="0" id="border_color" />
+									<input type="color" value="#808080" id="border_color" />
 								</td>
 							</tr>
 							<tr>
 								<td>BORDER STYLE</td>
 								<td class="input-td">
-									<input type="text" min="0" id="border_style" />
+									<select name="" id="border_style">
+										<option value="none">none</option>
+										<option value="dashed">dashed</option>
+										<option value="dotted">dotted</option>
+										<option value="double">double</option>
+									</select>
 								</td>
 							</tr>
 							<tr>

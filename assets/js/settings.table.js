@@ -1,5 +1,6 @@
 let tbSetting = {};
 let currDoc = "doc-header";
+let tbNum = 0;
 $(document).ready(function () {
   $("#columns").change(function () {
     const _thisVal = $(this).val();
@@ -89,19 +90,10 @@ $(document).ready(function () {
     };
   });
 
-	$("#addTb_inHeader").click(function(){
-		currDoc = "doc-header";
-		$("#settingModalLabel").text("Table Header Settings");
-		$('.modal').modal('toggle');
-	});
-	$("#addTb_inBody").click(function(){
-		currDoc = "doc-body";
-		$("#settingModalLabel").text("Table Body Settings");
-		$('.modal').modal('toggle');
-	});
-	$("#addTb_inFooter").click(function(){
-		currDoc = "doc-footer";
-		$("#settingModalLabel").text("Table Footer Settings");
+	$("#addTb_inDoc").click(function(){
+    tbNum++;
+		currDoc = "doc-table-" + tbNum;
+		$("#settingModalLabel").text("Table Settings");
 		$('.modal').modal('toggle');
 	});
 
@@ -126,13 +118,6 @@ $(document).ready(function () {
 
 function initailFunc() {
   setDocSize();
-	
-	// // starting to draw table ----
-	// getTableSetting();
-	// renderTable(tbSetting);
-	// setTableSetting(currDoc);
-	// createResizableTable($("."+currDoc+" .table")[0]);
-	// // starting to draw table ----
 }
 
 function setDocSize() {
@@ -143,6 +128,9 @@ function setDocSize() {
 }
 
 function renderTable(tableSetting) {
+  let divHtm = document.createElement("div");
+  divHtm.setAttribute("class", `table-container ${currDoc}`);
+  divHtm.setAttribute("target_id", currDoc);
   let tableHtm = document.createElement("table");
 	tableHtm.setAttribute("class", "table table-bordered mainTable");
   let tbHtm = document.createElement("tbody");
@@ -153,13 +141,14 @@ function renderTable(tableSetting) {
     trStr.setAttribute("ind", i);
     let tdStr = ``;
     for (var j = 0; j < columns; j++) {
-      tdStr += `<td ind="${j}" contenteditable="true"></td>`;
+      tdStr += `<td ind="${j}"></td>`;
     }
     trStr.innerHTML = tdStr;
     tbHtm.append(trStr);
   }
 	$(tableHtm).html(tbHtm);
-  $("."+currDoc).html(tableHtm);
+	$(divHtm).html(tableHtm);
+  $(".doc-container").append(divHtm);
 }
 
 function getTableSetting() {
@@ -177,14 +166,14 @@ function getTableSetting() {
 }
 
 function setTableSetting(selectedDoc) {
-  $("."+selectedDoc+" .table").height(tbSetting.table_height);
   $("."+selectedDoc+" .table").width(tbSetting.table_width);
-  $("."+selectedDoc+" thead").css("color", tbSetting.table_height);
+  $("."+selectedDoc+" .table tr").css("height", tbSetting.table_height);
+  $("."+selectedDoc+" thead").css("color", tbSetting.header_color);
   $(
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
   ).css("border-color", tbSetting.border_color);
   $(
-    "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
+    "."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
   ).css("border-style", tbSetting.border_style);
   $(
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
@@ -196,4 +185,6 @@ function setTableSetting(selectedDoc) {
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
   ).css("padding", tbSetting.padding + "px");
   $("."+selectedDoc+" .table").css("caption-side", tbSetting.caption_side + "px");
+
+  setDocSize();
 }

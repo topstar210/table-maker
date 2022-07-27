@@ -1,0 +1,67 @@
+@font-face{font-family:'Arial1';src:url('fonts/ARIAL.TTF')}
+:root {
+  --primary: #282A35;
+}
+
+html,body{
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Arial1;
+}
+.navbar-brand{
+  font-size: x-large;
+}
+.table {
+  margin-bottom: 0.5px !important;
+  border-color: grey 0.5px !important;
+  font-size: 15px !important;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding:3px 3px 3px 5px;
+}
+
+/* Start main-side style */
+.main-side {
+  float: left;
+  position: relative;
+  overflow: hidden;
+}
+.main-side div.doc-container {
+  position: absolute;
+  width: calc(100% - 23px);
+  z-index: 10;
+}
+.main-side .table {
+  background-color: transparent;
+}
+#doc-background {
+  opacity: 0.7;
+}
+.col-resizer {
+    cursor: col-resize;
+    user-select: none;
+
+}
+.row-resizer {
+    cursor: row-resize;
+    user-select: none;
+}
+.selected-td{
+  background-color: #e9e9e9 !important;
+}
+/* end main-side style */
+
+
+/* Start setting-side style  */
+/* end setting-side style  */
+
+
+/* Start demo code style */
+.demo-code {
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+}
+.demo-code .block-markdown__pre{
+  color: rgb(156, 220, 254); 
+}
+/* end demo code style */

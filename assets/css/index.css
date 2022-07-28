@@ -11,9 +11,9 @@ html,body{
 .navbar-brand{
   font-size: x-large;
 }
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+/* .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
   padding:3px 3px 3px 5px;
-}
+} */
 .doc-control-section {
   position:fixed;
   width: fit-content;
@@ -39,10 +39,13 @@ html,body{
 }
 .main-side .table {
   background-color: transparent;
-  margin-bottom: 0;
-  border-color: grey 0.5px !important;
+  margin: 0;
+  padding: 0;
   font-size: 15px !important;
   line-height: 0;
+}
+.main-side .table>:not(caption)>*>*{
+  padding: 0;
 }
 #doc-background {
   opacity: 0.7;

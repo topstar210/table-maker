@@ -20,6 +20,7 @@ const createResizable = function (dom, flag) {
     let w = 0;
     let y = 0;
     let h = 0;
+    let tdWidths = [];
 
     const mouseDownHandler = function (e) {
         if(!downFlag) return;
@@ -35,6 +36,12 @@ const createResizable = function (dom, flag) {
         else 
             h = parseInt(styles.height, 10);
 
+        const oneTr = $("." + currDoc + " .table tr")[0];
+        for (let i = 0; i < $(oneTr).children().length; i++) {
+            const originTdWidth = $("." + currDoc + " .table tr").find('td[ind='+i+']').width();
+            tdWidths[i] = originTdWidth;
+        }
+
         // console.log(x, w, "mouseDown");
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('mouseup', mouseUpHandler);
@@ -43,9 +50,29 @@ const createResizable = function (dom, flag) {
     const mouseMoveHandler = function (e) {
         if(flag === "C") {
             const diffX = e.clientX*1 - x*1;
+            
+            // // mode 1
+            // dom.style.width = w + diffX + 'px';
+            
+            // mode 4
             const domInd = $(dom).attr('ind');
-            const tds = $("." + currDoc + " .table tr").find('td[ind='+domInd+']');
-            tds.width(w + diffX);
+            let newTdWidths = [];
+            for (let i = 0; i < tdWidths.length; i++) {
+                let tdWidth = tdWidths[i];
+                if(domInd == i) {
+                    newTdWidths[i] = tdWidth + diffX;
+                } else if(domInd*1 + 1 == i) {
+                    newTdWidths[i] = tdWidth - diffX;
+                } else {
+                    newTdWidths[i] = tdWidth;
+                }
+            }
+            // console.log(domInd, newTdWidths);return;
+            for (let i = 0; i < newTdWidths.length; i++) {
+                let tdWidth = newTdWidths[i];
+                $("." + currDoc + " .table tr").find('td[ind='+i+']').width(tdWidth);
+            }
+
         } else {
             const diffY = e.clientY - y;
             dom.style.height = `${h + diffY}px`;

@@ -1,6 +1,7 @@
 let tbSetting = {};
 let currDoc = "doc-header";
 let tbNum = 0;
+let defaultTbWidth = 0;
 $(document).ready(function () {
   $("#columns").change(function () {
     const _thisVal = $(this).val();
@@ -121,9 +122,9 @@ function initailFunc() {
 }
 
 function setDocSize() {
-  const tbCW = $("#doc-background").width();
-  const tbCml = ($(".doc-container").width() - tbCW) / 2;
-  $(".table-container").width(tbCW);
+  defaultTbWidth = $("#doc-background").width();
+  const tbCml = ($(".doc-container").width() - defaultTbWidth) / 2;
+  $(".table-container").width(defaultTbWidth);
   $(".table-container").css("margin-left", tbCml + "px");
 }
 

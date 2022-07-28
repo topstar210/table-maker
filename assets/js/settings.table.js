@@ -124,8 +124,8 @@ function initailFunc() {
 function setDocSize() {
   defaultTbWidth = $("#doc-background").width();
   const tbCml = ($(".doc-container").width() - defaultTbWidth) / 2;
-  $(".table-container").width(defaultTbWidth);
-  $(".table-container").css("margin-left", tbCml + "px");
+  $("."+currDoc).width(defaultTbWidth);
+  $("."+currDoc).css("margin-left", tbCml + "px");
 }
 
 function renderTable(tableSetting) {
@@ -136,19 +136,22 @@ function renderTable(tableSetting) {
 	tableHtm.setAttribute("class", "table table-bordered mainTable");
   let tbHtm = document.createElement("tbody");
   const { rows, columns } = tableSetting;
+  const tdWidth = defaultTbWidth / columns;
 
   for (var i = 0; i < rows; i++) {
     const trStr = document.createElement("tr");
     trStr.setAttribute("ind", i);
     let tdStr = ``;
     for (var j = 0; j < columns; j++) {
-      tdStr += `<td ind="${j}"></td>`;
+      tdStr += `<td ind="${j}" style="width:${tdWidth}"></td>`;
     }
     trStr.innerHTML = tdStr;
     tbHtm.append(trStr);
   }
 	$(tableHtm).html(tbHtm);
-	$(divHtm).html(tableHtm);
+  $(divHtm).append(`<div class="tb-resize-top-cursor"></div>`);
+	$(divHtm).append(tableHtm);
+  $(divHtm).append(`<div class="tb-resize-bottom-cursor"></div>`);
   $(".doc-container").append(divHtm);
 }
 
@@ -186,6 +189,6 @@ function setTableSetting(selectedDoc) {
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
   ).css("padding", tbSetting.padding + "px");
   $("."+selectedDoc+" .table").css("caption-side", tbSetting.caption_side + "px");
-
+  
   setDocSize();
 }

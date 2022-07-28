@@ -5,16 +5,18 @@
 const createResizableTable = function (table) {
     const cols = table.querySelectorAll('td');
     [].forEach.call(cols, function (col) {
-        createResizable(col, 'C');
+        createColumnResizable(col, 'C');
     });
     
     const rows = table.querySelectorAll('tr');
     [].forEach.call(rows, function (row) {
-        createResizable(row, 'R');
+        createColumnResizable(row, 'R');
     });
+
+    createTableResizable(table);
 };
 
-const createResizable = function (dom, flag) {
+const createColumnResizable = function (dom, flag) {
     let downFlag = 0;
     let x = 0;
     let w = 0;
@@ -53,7 +55,7 @@ const createResizable = function (dom, flag) {
             
             // // mode 1
             // dom.style.width = w + diffX + 'px';
-            
+
             // mode 4
             const domInd = $(dom).attr('ind');
             let newTdWidths = [];
@@ -113,3 +115,72 @@ const createResizable = function (dom, flag) {
     dom.addEventListener('mousemove', mouseMoveOnRowHandler);  
     dom.addEventListener('mousedown', mouseDownHandler);
 };
+
+const createTableResizable = function (table) {
+    let editableFlag = 0;
+    let w = 0;
+    let h = 0
+    let downPosX = 0;
+    let downPosY = 0;
+    let tbMLeft = 0;
+    let tbMTop = 0;
+    let tbMBottom = 0;
+    $(document).on("mousedown mousemove mouseout", ".tb-resize-top-cursor", function(e){
+        if(e.type == "mousedown"){
+            editableFlag = 1;
+            w = $("." + currDoc).width();
+            h = $("." + currDoc).height();
+            tbMLeft = parseInt($("." + currDoc).css('margin-left'));
+            tbMTop = parseInt($("." + currDoc).css('margin-top'));
+            downPosX = e.clientX;
+            downPosY = e.clientY;
+        } else if (e.type == "mousemove") {
+            if(editableFlag){
+                const diffX = e.clientX*1 - downPosX*1;
+                const diffY = e.clientY*1 - downPosY*1;
+                const docHeight = h - diffY;
+                $("." + currDoc).css({
+                    "margin-top": tbMTop + diffY + "px",
+                    "margin-left": tbMLeft + diffX + "px",
+                    "width": w - diffX +"px"
+                });
+                const trNum = $("." + currDoc + " .table tr").length;
+                const trHeight = docHeight / trNum;
+                $("." + currDoc + " .table tr").css({
+                    "height": trHeight + "px",
+                });
+            }
+        } else {
+            editableFlag = 0;
+        }
+    });
+    $(document).on("mousedown mousemove mouseout", ".tb-resize-bottom-cursor", function(e){
+        if(e.type == "mousedown"){
+            editableFlag = 1;
+            w = $("." + currDoc).width();
+            h = $("." + currDoc).height();
+            tbMBottom = parseInt($("." + currDoc).css('margin-bottom'));
+            downPosX = e.clientX;
+            downPosY = e.clientY;
+        } else if (e.type == "mousemove") {
+            console.log('docHeight');
+            if(editableFlag){
+                const diffX = e.clientX*1 - downPosX*1;
+                const diffY = e.clientY*1 - downPosY*1;
+                const docHeight = h + diffY;
+                $("." + currDoc).width(w + diffX);
+                $("." + currDoc).css({
+                    "margin-bottom": tbMBottom - diffY + "px",
+                });
+
+                const trNum = $("." + currDoc + " .table tr").length;
+                const trHeight = docHeight / trNum;
+                $("." + currDoc + " .table tr").css({
+                    "height": trHeight + "px",
+                });
+            }
+        } else {
+            editableFlag = 0;
+        }
+    });
+}

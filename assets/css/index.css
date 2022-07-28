@@ -30,7 +30,28 @@ html,body{
 .main-side {
   float: left;
   position: relative;
-  overflow: hidden;
+}
+.main-side .table-container {
+  position: relative;
+}
+.main-side .table-container .tb-resize-bottom-cursor{
+  position: absolute;
+  z-index: 20;
+  width: 8px;
+  height: 8px;
+  right: -8px;
+  cursor: nwse-resize;
+  background-color: #80808082;
+}
+.main-side .table-container .tb-resize-top-cursor{
+  position: absolute;
+  z-index: 20;
+  width: 8px;
+  height: 8px;
+  left: -8px;
+  top: -8px;
+  cursor: nwse-resize;
+  background-color: #80808082;
 }
 .main-side div.doc-container {
   position: absolute;
@@ -46,6 +67,7 @@ html,body{
 }
 .main-side .table>:not(caption)>*>*{
   padding: 0;
+  vertical-align: middle;
 }
 #doc-background {
   opacity: 0.7;

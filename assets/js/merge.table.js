@@ -18,7 +18,7 @@ $(document).ready(function () {
       merge: { name: "Merge", icon: "code-merge" },
       sep1: "---------",
       quit: {
-        name: "Quit",
+        name: "Cancel",
         icon: function () {
           return "context-menu-icon context-menu-icon-quit";
         },

@@ -38,13 +38,24 @@ const createColumnResizable = function (dom, flag) {
         else 
             h = parseInt(styles.height, 10);
 
-        const oneTr = $("." + currDoc + " .table tr")[0];
-        for (let i = 0; i < $(oneTr).children().length; i++) {
-            const originTdWidth = $("." + currDoc + " .table tr").find('td[ind='+i+']').width();
-            tdWidths[i] = originTdWidth;
+        const siblingTds = $(dom).parent().children();
+        let index = 0;
+        for (let i = 0; i < siblingTds.length; i++) {
+            const selTd = $(siblingTds[i]).width();
+            let colspan = parseInt($(siblingTds[i]).attr('colspan'));
+            if(colspan > 0 && siblingTds[i+1] != undefined){
+                tdWidths[index] = selTd;
+                for (let j = 0; j < colspan; j++) {
+                    index++;
+                    tdWidths[index] = NaN;
+                }
+                continue;
+            } else {
+                tdWidths[index] = selTd;
+                index++;
+            }
         }
 
-        // console.log(x, w, "mouseDown");
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('mouseup', mouseUpHandler);
     };
@@ -52,24 +63,18 @@ const createColumnResizable = function (dom, flag) {
     const mouseMoveHandler = function (e) {
         if(flag === "C") {
             const diffX = e.clientX*1 - x*1;
-            
-            // // mode 1
-            // dom.style.width = w + diffX + 'px';
-
-            // mode 4
-            const domInd = $(dom).attr('ind');
+            const domInd = $(dom).attr('ind') * 1;
             let newTdWidths = [];
             for (let i = 0; i < tdWidths.length; i++) {
                 let tdWidth = tdWidths[i];
                 if(domInd == i) {
                     newTdWidths[i] = tdWidth + diffX;
-                } else if(domInd*1 + 1 == i) {
+                } else if(domInd + 1 == i) {
                     newTdWidths[i] = tdWidth - diffX;
                 } else {
                     newTdWidths[i] = tdWidth;
                 }
             }
-            // console.log(domInd, newTdWidths);return;
             for (let i = 0; i < newTdWidths.length; i++) {
                 let tdWidth = newTdWidths[i];
                 $("." + currDoc + " .table tr").find('td[ind='+i+']').width(tdWidth);

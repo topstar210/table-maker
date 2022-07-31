@@ -21,9 +21,11 @@ $(document).ready(function(){
       }
     },
     items: {
-      editable: { name: "editable", icon: "edit" },
-      insertImg: { name: "insert image", icon: "add" },
-      addRow: { name: "add row", icon: "add" }
+      editable: { name: "Editable", icon: "edit" },
+      insertImg: { name: "Insert image", icon: "add" },
+      addRow: { name: "Add row", icon: "add" },
+      sep1: "---------",
+      quit: { name: "Cancel", icon: "quit" },
     },
   });
 
@@ -49,7 +51,6 @@ function clickInsertImageBtn() {
 }
 
 function addRowInTable() {
-  const thisInd = selectedTd.attr("ind");
   const trNode = selectedTd.parent();
   const tableNode = selectedTd.parents("tbody");
   const tdCnt = trNode.children().length - 1;
@@ -64,4 +65,5 @@ function addRowInTable() {
   }
   trStr.innerHTML = tdStr;
   tableNode.append(trStr);
+  createResizableTable($("."+currDoc+" .table")[0]);
 }

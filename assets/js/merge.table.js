@@ -17,12 +17,7 @@ $(document).ready(function () {
     items: {
       merge: { name: "Merge", icon: "code-merge" },
       sep1: "---------",
-      quit: {
-        name: "Cancel",
-        icon: function () {
-          return "context-menu-icon context-menu-icon-quit";
-        },
-      },
+      quit: { name: "Cancel", icon: "quit" },
     },
   });
 });

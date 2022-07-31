@@ -2,7 +2,7 @@ let startColPos = -1;
 let endColPos = -1;
 let startRowPos = -1;
 let endRowPos = -1;
-let selectedTdToEdit = null;
+let selectedTd = null;
 
 $(document).ready(function () {
   tdSelectFucInit();
@@ -25,20 +25,6 @@ $(document).ready(function () {
       },
     },
   });
-
-  $.contextMenu({
-    selector: "td",
-    callback: function (key, options) {
-      if (key == "editable") {
-        selectedTdToEdit.attr("contenteditable", "true");
-        selectedTdToEdit.css("line-height", "20px");
-        selectedTdToEdit.focus();
-      }
-    },
-    items: {
-      editable: { name: "editable", icon: "edit" }
-    },
-  });
 });
 
 function tdSelectFucInit() {
@@ -47,7 +33,7 @@ function tdSelectFucInit() {
     "." + currDoc + " .table td",
     function (e) {
       if (e.which == 3) {
-        selectedTdToEdit = $(this);
+        selectedTd = $(this);
         return;
       };
 

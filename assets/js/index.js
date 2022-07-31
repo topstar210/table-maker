@@ -1,21 +1,4 @@
 $(document).ready(function(){
-  // $(document).on('keydown','.table td', function(e) {
-	// 	const thisInd = $(this).attr("ind");
-  //   const trNode = $(this).parent();
-  //   const tdCnt = trNode.children().length - 1;
-  //   if(thisInd == tdCnt && e.keyCode==13 && e.ctrlKey){
-  //     const trStr = document.createElement("tr");
-  //     trStr.setAttribute("ind", trNode.attr("ind"));
-  //     let tdStr = ``;
-  //     for (var j = 0; j <= tdCnt; j++) {
-  //       tdStr += `<td ind="${j}"></td>`;
-  //     }
-  //     trStr.innerHTML = tdStr;
-  //     const selectedTable = $(this).parents("tbody");
-  //     selectedTable.append(trStr);
-  //   }
-	// });
-
   $(document).on("mouseover mouseleave", ".doc-control-section>button", function(e){
     if(e.type == "mouseleave"){
       $(this).find("span").hide();
@@ -24,4 +7,61 @@ $(document).ready(function(){
     }
   });
   
-})
+  $.contextMenu({
+    selector: "td",
+    callback: function (key, options) {
+      if (key == "editable") {
+        selectedTd.attr("contenteditable", "true");
+        selectedTd.css({"line-height": "20px", "text-indent": "3px"});
+        selectedTd.focus();
+      } else if(key == "insertImg") {
+        clickInsertImageBtn();
+      } else if(key == "addRow") {
+        addRowInTable();
+      }
+    },
+    items: {
+      editable: { name: "editable", icon: "edit" },
+      insertImg: { name: "insert image", icon: "add" },
+      addRow: { name: "add row", icon: "add" }
+    },
+  });
+
+  $(document).on("change", "#putImageInTd", function(input) {
+    let file = input.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function () {
+      selectedTd.append(`<img src='${reader.result}' />`);
+    };
+    reader.onloadend = function () {
+      $("#putImageInTd").remove();
+    };
+  })
+  
+});
+
+function clickInsertImageBtn() {
+  const inputString = `<input type="file" id="putImageInTd" accept="image/*" style="display:none"></input>`;
+  $('body').append(inputString);
+  $("#putImageInTd").click();
+}
+
+function addRowInTable() {
+  const thisInd = selectedTd.attr("ind");
+  const trNode = selectedTd.parent();
+  const tableNode = selectedTd.parents("tbody");
+  const tdCnt = trNode.children().length - 1;
+  const trCnt = tableNode.find("tr").length;
+
+  const trStr = document.createElement("tr");
+  trStr.setAttribute("ind", trCnt);
+  trStr.setAttribute("style", 'height:'+trNode.height()+'px');
+  let tdStr = ``;
+  for (var j = 0; j <= tdCnt; j++) {
+    tdStr += `<td ind="${j}"></td>`;
+  }
+  trStr.innerHTML = tdStr;
+  tableNode.append(trStr);
+}

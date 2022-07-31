@@ -81,11 +81,9 @@ $(document).ready(function () {
     reader.onload = function () {
       $("#doc-background").attr("src", reader.result);
     };
-
     reader.onloadend = function () {
       setDocSize();
     };
-
     reader.onerror = function () {
       console.log(reader.error);
     };

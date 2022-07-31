@@ -159,7 +159,7 @@ const createTableResizable = function (table) {
             editableFlag = 0;
         }
     });
-    $(document).on("mousedown mousemove mouseout", ".tb-resize-bottom-cursor", function(e){
+    $(document).on("mousedown mousemove mouseup", ".tb-resize-bottom-cursor", function(e){
         if(e.type == "mousedown"){
             editableFlag = 1;
             w = $("." + currDoc).width();
@@ -168,7 +168,6 @@ const createTableResizable = function (table) {
             downPosX = e.clientX;
             downPosY = e.clientY;
         } else if (e.type == "mousemove") {
-            console.log('docHeight');
             if(editableFlag){
                 const diffX = e.clientX*1 - downPosX*1;
                 const diffY = e.clientY*1 - downPosY*1;
@@ -188,4 +187,7 @@ const createTableResizable = function (table) {
             editableFlag = 0;
         }
     });
+    $(document).on("mouseup", function(e){
+        editableFlag = 0;
+    })
 }

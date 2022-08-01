@@ -184,7 +184,7 @@ const createTableResizable = function (table) {
                 });
             }
         } else {
-            editableFlag = 0;
+            // editableFlag = 0;
         }
     });
     $(document).on("mouseup", function(e){

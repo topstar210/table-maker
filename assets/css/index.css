@@ -37,21 +37,21 @@ html,body{
 .main-side .table-container .tb-resize-bottom-cursor{
   position: absolute;
   z-index: 20;
-  width: 8px;
-  height: 8px;
-  right: -8px;
+  width: 20px;
+  height: 20px;
+  right: -20px;
   cursor: nwse-resize;
-  background-color: #80808082;
+  /* background-color: #80808082; */
 }
 .main-side .table-container .tb-resize-top-cursor{
   position: absolute;
   z-index: 20;
-  width: 8px;
-  height: 8px;
-  left: -8px;
-  top: -8px;
+  width: 20px;
+  height: 20px;
+  left: -20px;
+  top: -20px;
   cursor: nwse-resize;
-  background-color: #80808082;
+  /* background-color: #80808082; */
 }
 .main-side div.doc-container {
   position: absolute;

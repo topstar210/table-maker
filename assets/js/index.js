@@ -8,7 +8,7 @@ $(document).ready(function(){
   });
   
   $.contextMenu({
-    selector: "td",
+    selector: ".doc-container td",
     callback: function (key, options) {
       if (key == "editable") {
         selectedTd.attr("contenteditable", "true");

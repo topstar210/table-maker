@@ -89,22 +89,22 @@ $(document).ready(function () {
     };
   });
 
-	$("#addTb_inDoc").click(function(){
-    tbNum++;
-		currDoc = "doc-table-" + tbNum;
-		$("#settingModalLabel").text("Table Settings");
-		$('.modal').modal('toggle');
-	});
-
   $("#make_table").click(function () {
+    tbNum++;
+    currDoc = "doc-table-" + tbNum;
+    
     getTableSetting();
     renderTable(tbSetting);
     setTableSetting(currDoc);
     createResizableTable($("."+currDoc+" .table")[0]);
-
     const mainTbHtm = $("#tb_source").html();
     $(".block-markdown__pre").text(mainTbHtm.trim());
-		$('.modal').modal('toggle');
+
+    $("#make_table").hide();
+    $("#change_table").show();
+  });
+  $("#change_table").click(function(){
+    setTableSetting(currDoc);
   });
 
 	$(document).on('mouseover','.table-container', function(e) {
@@ -116,6 +116,8 @@ $(document).ready(function () {
 });
 
 function initailFunc() {
+  $("#change_table").hide();
+
   setDocSize();
 }
 
@@ -179,14 +181,14 @@ function setTableSetting(selectedDoc) {
   ).css("border-style", tbSetting.border_style);
   $(
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
-  ).css("border-width", tbSetting.table_width + "px");
+  ).css("border-width", tbSetting.border_width + "px");
   $("."+selectedDoc+" .table").css("border-collapse", tbSetting.border_collapse);
   $("."+selectedDoc+" .table").css("border-spacing", tbSetting.border_spacing);
   $("."+selectedDoc+" .table").css("text-align", tbSetting.text_align);
   $(
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
   ).css("padding", tbSetting.padding + "px");
-  $("."+selectedDoc+" .table").css("caption-side", tbSetting.caption_side + "px");
+  $("."+selectedDoc+" .table").css("caption-side", tbSetting.caption_side);
   
   setDocSize();
 }

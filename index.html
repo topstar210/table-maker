@@ -30,36 +30,132 @@
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="mynavbar">
-				<ul class="navbar-nav me-auto">
-				</ul>
-				<div class="d-flex" action="./">
-					<button class="btn btn btn-outline-light" type="button">Save In DB</button>
-				</div>
-			</div>
 		</div>
 	</nav>
 
 	<div class="container-fluid">
 		<div class="row p-2">
-			<div class="doc-control-section">
-				<button class="btn btn-outline-dark btn-lg add-table-btn mt-3" id="addTb_inDoc">
-					<i class="fa fa-plus"></i> <span>Add Table</span>
-				</button>
-				<button class="btn btn-dark btn-lg mt-3" id="upload_image" title="Change Image">
-					<i class="fa fa-edit"></i> <span>Change Image</span>
-				</button>
+			<div class="doc-control-section col-lg-3">
+				<table class="table setting-table">
+					<thead>
+						<tr>
+							<th>ITEM</th>
+							<th>VALUE</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>COLUMNS</td>
+							<td class="input-td">
+								<input type="number" min="0" value="3" id="columns" />
+							</td>
+						</tr>
+						<tr>
+							<td>ROWS</td>
+							<td class="input-td">
+								<input type="number" min="0" value="4" id="rows" />
+							</td>
+						</tr>
+						<tr>
+							<td>ROW HEIGHT</td>
+							<td class="input-td">
+								<input type="number" min="0" value="28" id="table_height" />
+							</td>
+						</tr>
+						<tr>
+							<td>BORDER COLOR</td>
+							<td class="input-td">
+								<input type="color" value="#808080" id="border_color" />
+							</td>
+						</tr>
+						<tr>
+							<td>BORDER STYLE</td>
+							<td class="input-td">
+								<select name="" id="border_style">
+									<option value="none">none</option>
+									<option value="dashed">dashed</option>
+									<option value="dotted">dotted</option>
+									<option value="double">double</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>BORDER WIDTH</td>
+							<td class="input-td">
+								<input type="number" min="0" id="border_width" />
+							</td>
+						</tr>
+						<tr>
+							<td>BORDER COLLAPSE</td>
+							<td class="input-td">
+								<select name="" id="border_collapse">
+									<option value=""></option>
+									<option value="collapse">collapse</option>
+									<option value="separate">separate</option>
+									<option value="revert">revert</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>BORDER SPACING</td>
+							<td class="input-td">
+								<input type="number" min="0" id="border_spacing" />
+							</td>
+						</tr>
+						<tr>
+							<td>TEXT ALIGN</td>
+							<td class="input-td">
+								<select name="" id="text_align">
+									<option value=""></option>
+									<option value="left">left</option>
+									<option value="center">center</option>
+									<option value="right">right</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>PADDING</td>
+							<td class="input-td">
+								<input type="number" min="0" id="padding" />
+							</td>
+						</tr>
+						<tr>
+							<td>CAPTION SIDE</td>
+							<td class="input-td">
+								<select name="" id="caption_side">
+									<option value=""></option>
+									<option value="bottom">bottom</option>
+									<option value="top">top</option>
+									<option value="revert">revert</option>
+								</select>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>CAPTION ALIGN</td>
+							<td class="input-td">
+								<input type="number" min="0" id="caption_align" />
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="btn-group col-sm-12" role="group" aria-label="Basic outlined example">
+						<button type="button" class="btn btn-outline-dark">DB</button>
+						<button type="button" class="btn btn-outline-dark" id="upload_image">BG</button>
+						<button type="button" class="btn btn-outline-dark" id="make_table">OK</button>
+						<button type="button" class="btn btn-outline-dark" id="change_table">OK</button>
+					</div>
+				</div>
 				<input type="file" id="fileElem" accept="image/*" style="display:none">
 			</div>
-			<!-- <div class="main-side col-lg-8 mb-2" id="tb_source"> -->
-			<div class="main-side col-lg-12 mb-2" id="tb_source">
+			<div class="main-side col-auto mb-2" id="tb_source">
 				<div class="text-center" style="width: 100%;">
 					<div class="doc-container">
 					</div>
 					<img id="doc-background" src="./assets/images/default_bg.png" />
 				</div>
 			</div>
-			<div class="col-lg-4" style="display: none;">
+			<div class="col-auto">
 				<pre class="demo-code">
 					<xmp class="block-markdown__pre">SOURCE CODE</xmp>
 				</pre>
@@ -69,123 +165,6 @@
 
 	<div class="p-1 bg-dark text-white text-center">
 		<p>HTML table code generator @2022</p>
-	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="settingModalLabel">Table Setting</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<table class="table setting-table">
-						<thead>
-							<tr>
-								<th>ITEM</th>
-								<th>VALUE</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>COLUMNS</td>
-								<td class="input-td">
-									<input type="number" min="0" value="3" id="columns" />
-								</td>
-							</tr>
-							<tr>
-								<td>ROWS</td>
-								<td class="input-td">
-									<input type="number" min="0" value="4" id="rows" />
-								</td>
-							</tr>
-							<tr>
-								<td>ROW HEIGHT</td>
-								<td class="input-td">
-									<input type="number" min="0" value="28" id="table_height" />
-								</td>
-							</tr>
-							<!-- <tr>
-								<td>TABLE WIDTH</td>
-								<td class="input-td">
-									<input type="number" min="0" id="table_width" />
-								</td>
-							</tr> -->
-							<!-- <tr>
-								<td>HEADER COLOR</td>
-								<td class="input-td">
-									<input type="text" min="0" id="header_color" />
-								</td>
-							</tr> -->
-							<tr>
-								<td>BORDER COLOR</td>
-								<td class="input-td">
-									<input type="color" value="#808080" id="border_color" />
-								</td>
-							</tr>
-							<tr>
-								<td>BORDER STYLE</td>
-								<td class="input-td">
-									<select name="" id="border_style">
-										<option value="none">none</option>
-										<option value="dashed">dashed</option>
-										<option value="dotted">dotted</option>
-										<option value="double">double</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>BORDER WIDTH</td>
-								<td class="input-td">
-									<input type="number" min="0" id="border_width" />
-								</td>
-							</tr>
-							<tr>
-								<td>BORDER COLLAPSE</td>
-								<td class="input-td">
-									<input type="text" min="0" id="border_collapse" />
-								</td>
-							</tr>
-							<tr>
-								<td>BORDER SPACING</td>
-								<td class="input-td">
-									<input type="number" min="0" id="border_spacing" />
-								</td>
-							</tr>
-							<tr>
-								<td>TEXT ALIGN</td>
-								<td class="input-td">
-									<input type="text" min="0" id="text_align" />
-								</td>
-							</tr>
-							<tr>
-								<td>PADDING</td>
-								<td class="input-td">
-									<input type="number" min="0" id="padding" />
-								</td>
-							</tr>
-							<tr>
-								<td>CAPTION SIDE</td>
-								<td class="input-td">
-									<input type="text" min="0" id="caption_side" />
-								</td>
-							</tr>
-							<!-- <tr>
-	    						<td>CAPTION ALIGN</td>
-	    						<td class="input-td">
-	    							<input type="number" min="0" id="caption_align" />
-	    						</td>
-	    					</tr> -->
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
-					<button type="button" class="btn btn-primary" id="make_table">SURE</button>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<script type="text/javascript" src="./assets/js/resize.table.js"></script>

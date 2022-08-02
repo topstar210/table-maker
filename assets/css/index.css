@@ -11,24 +11,16 @@ html,body{
 .navbar-brand{
   font-size: x-large;
 }
-/* .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-  padding:3px 3px 3px 5px;
-} */
 .doc-control-section {
-  position:fixed;
   width: fit-content;
-  z-index: 10;
 }
-.doc-control-section>button {
-  display: block;
-}
-.doc-control-section>button span {
-  display: none;
+.doc-control-section input, .doc-control-section select{
+  width: 80px;
 }
 
 /* Start main-side style */
 .main-side {
-  float: left;
+  /* float: left; */
   position: relative;
 }
 .main-side .table-container {
@@ -85,11 +77,6 @@ html,body{
   background-color: #e9e9e9 !important;
 }
 /* end main-side style */
-
-
-/* Start setting-side style  */
-/* end setting-side style  */
-
 
 /* Start demo code style */
 .demo-code {

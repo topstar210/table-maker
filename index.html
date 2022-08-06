@@ -34,8 +34,8 @@
 	</nav>
 
 	<div class="container-fluid">
-		<div class="row p-2">
-			<div class="doc-control-section col-lg-3">
+		<div class="row pt-2">
+			<div class="doc-control-section col-md-3 mb-5">
 				<table class="table setting-table">
 					<thead>
 						<tr>
@@ -59,7 +59,13 @@
 						<tr>
 							<td>ROW HEIGHT</td>
 							<td class="input-td">
-								<input type="number" min="0" value="28" id="table_height" />
+								<input type="number" min="0" value="28" id="row_height" />
+							</td>
+						</tr>
+						<tr>
+							<td>TABLE WIDTH</td>
+							<td class="input-td">
+								<input type="number" id="table_width" />
 							</td>
 						</tr>
 						<tr>
@@ -148,14 +154,14 @@
 				</div>
 				<input type="file" id="fileElem" accept="image/*" style="display:none">
 			</div>
-			<div class="main-side col-auto mb-2" id="tb_source">
+			<div class="main-side col-md-6 mb-2 pt-2" id="tb_source">
 				<div class="text-center" style="width: 100%;">
 					<div class="doc-container">
 					</div>
-					<img id="doc-background" src="./assets/images/default_bg.png" />
+					<img id="doc-background" width="100%" src="" />
 				</div>
 			</div>
-			<div class="col-auto">
+			<div class="col-md-3">
 				<pre class="demo-code">
 					<xmp class="block-markdown__pre">SOURCE CODE</xmp>
 				</pre>

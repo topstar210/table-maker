@@ -1,21 +1,24 @@
+let tbSetting_origin = {};
 let tbSetting = {};
 let currDoc = "doc-header";
 let tbNum = 0;
 let defaultTbWidth = 0;
 $(document).ready(function () {
   $("#columns").change(function () {
+    tbSetting_origin.columns = tbSetting.columns;
     const _thisVal = $(this).val();
     tbSetting.columns = _thisVal;
   });
 
   $("#rows").change(function () {
+    tbSetting_origin.rows = tbSetting.rows;
     const _thisVal = $(this).val();
     tbSetting.rows = _thisVal;
   });
 
-  $("#table_height").change(function () {
+  $("#row_height").change(function () {
     const _thisVal = $(this).val();
-    tbSetting.table_height = _thisVal;
+    tbSetting.row_height = _thisVal;
   });
 
   $("#table_width").change(function () {
@@ -104,6 +107,13 @@ $(document).ready(function () {
     $("#change_table").show();
   });
   $("#change_table").click(function(){
+    getTableSetting();  
+    if(tbSetting_origin.columns != tbSetting.columns || tbSetting_origin.rows != tbSetting.rows){
+      // console.log(tbSetting_origin, tbSetting)
+      $(".doc-container").html("");
+      renderTable(tbSetting);
+      createResizableTable($("."+currDoc+" .table")[0]);
+    }
     setTableSetting(currDoc);
   });
 
@@ -124,7 +134,7 @@ function initailFunc() {
 function setDocSize() {
   defaultTbWidth = $("#doc-background").width();
   const tbCml = ($(".doc-container").width() - defaultTbWidth) / 2;
-  $("."+currDoc).width(defaultTbWidth);
+  // $("."+currDoc).width(defaultTbWidth);
   $("."+currDoc).css("margin-left", tbCml + "px");
 }
 
@@ -158,7 +168,7 @@ function renderTable(tableSetting) {
 function getTableSetting() {
   tbSetting.columns = $("#columns").val();
   tbSetting.rows = $("#rows").val();
-  tbSetting.table_height = $("#table_height").val();
+  tbSetting.row_height = $("#row_height").val();
   tbSetting.table_width = $("#table_width").val();
   tbSetting.border_color = $("#border_color").val();
   tbSetting.border_width = $("#border_width").val();
@@ -170,8 +180,9 @@ function getTableSetting() {
 }
 
 function setTableSetting(selectedDoc) {
-  $("."+selectedDoc+" .table").width(tbSetting.table_width);
-  $("."+selectedDoc+" .table tr").css("height", tbSetting.table_height);
+  $("."+selectedDoc).width(tbSetting.table_width);
+  $("."+selectedDoc+" .table").width("100%");
+  $("."+selectedDoc+" .table tr").css("height", tbSetting.row_height);
   $("."+selectedDoc+" thead").css("color", tbSetting.header_color);
   $(
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
@@ -189,6 +200,5 @@ function setTableSetting(selectedDoc) {
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
   ).css("padding", tbSetting.padding + "px");
   $("."+selectedDoc+" .table").css("caption-side", tbSetting.caption_side);
-  
   setDocSize();
 }

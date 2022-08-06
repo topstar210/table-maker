@@ -139,8 +139,35 @@ const createTableResizable = function (table) {
             tbMTop = parseInt($("." + currDoc).css('margin-top'));
             downPosX = e.clientX;
             downPosY = e.clientY;
-        } else if (e.type == "mousemove") {
-            if(editableFlag){
+        }
+    });
+    $(document).on("mousedown mousemove mouseup", ".tb-resize-bottom-cursor", function(e){
+        if(e.type == "mousedown"){
+            editableFlag = 3;
+            w = $("." + currDoc).width();
+            h = $("." + currDoc).height();
+            tbMBottom = parseInt($("." + currDoc).css('margin-bottom'));
+            downPosX = e.clientX;
+            downPosY = e.clientY;
+        }
+    });
+    $(document).on("mousemove mouseup", function(e){
+        if (e.type == "mousemove") {
+            if(editableFlag == 3){
+                const diffX = e.clientX*1 - downPosX*1;
+                const diffY = e.clientY*1 - downPosY*1;
+                const docHeight = h + diffY;
+                $("." + currDoc).width(w + diffX);
+                $("." + currDoc).css({
+                    "margin-bottom": tbMBottom - diffY + "px",
+                });
+
+                const trNum = $("." + currDoc + " .table tr").length;
+                const trHeight = docHeight / trNum;
+                $("." + currDoc + " .table tr").css({
+                    "height": trHeight + "px",
+                });
+            } else if(editableFlag == 1) {
                 const diffX = e.clientX*1 - downPosX*1;
                 const diffY = e.clientY*1 - downPosY*1;
                 const docHeight = h - diffY;
@@ -158,36 +185,5 @@ const createTableResizable = function (table) {
         } else {
             editableFlag = 0;
         }
-    });
-    $(document).on("mousedown mousemove mouseup", ".tb-resize-bottom-cursor", function(e){
-        if(e.type == "mousedown"){
-            editableFlag = 1;
-            w = $("." + currDoc).width();
-            h = $("." + currDoc).height();
-            tbMBottom = parseInt($("." + currDoc).css('margin-bottom'));
-            downPosX = e.clientX;
-            downPosY = e.clientY;
-        } else if (e.type == "mousemove") {
-            if(editableFlag){
-                const diffX = e.clientX*1 - downPosX*1;
-                const diffY = e.clientY*1 - downPosY*1;
-                const docHeight = h + diffY;
-                $("." + currDoc).width(w + diffX);
-                $("." + currDoc).css({
-                    "margin-bottom": tbMBottom - diffY + "px",
-                });
-
-                const trNum = $("." + currDoc + " .table tr").length;
-                const trHeight = docHeight / trNum;
-                $("." + currDoc + " .table tr").css({
-                    "height": trHeight + "px",
-                });
-            }
-        } else {
-            // editableFlag = 0;
-        }
-    });
-    $(document).on("mouseup", function(e){
-        editableFlag = 0;
     })
 }

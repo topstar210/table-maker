@@ -12,7 +12,7 @@ html,body{
   font-size: x-large;
 }
 .doc-control-section {
-  width: fit-content;
+  /* width: fit-content; */
 }
 .doc-control-section input, .doc-control-section select{
   width: 80px;
@@ -20,7 +20,7 @@ html,body{
 
 /* Start main-side style */
 .main-side {
-  /* float: left; */
+  border: 1px solid black; 
   position: relative;
 }
 .main-side .table-container {
@@ -29,21 +29,21 @@ html,body{
 .main-side .table-container .tb-resize-bottom-cursor{
   position: absolute;
   z-index: 20;
-  width: 20px;
-  height: 20px;
-  right: -20px;
+  width: 10px;
+  height: 10px;
+  right: -10px;
   cursor: nwse-resize;
-  /* background-color: #80808082; */
+   background-color: #80808082; 
 }
 .main-side .table-container .tb-resize-top-cursor{
   position: absolute;
   z-index: 20;
-  width: 20px;
-  height: 20px;
-  left: -20px;
-  top: -20px;
+  width: 10px;
+  height: 10px;
+  left: -10px;
+  top: -10px;
   cursor: nwse-resize;
-  /* background-color: #80808082; */
+   background-color: #80808082; 
 }
 .main-side div.doc-container {
   position: absolute;
@@ -74,7 +74,7 @@ html,body{
     user-select: none;
 }
 .selected-td{
-  background-color: #e9e9e9 !important;
+  background-color: #cdcdcd !important;
 }
 /* end main-side style */
 

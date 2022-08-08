@@ -3,6 +3,7 @@ let tbSetting = {};
 let currDoc = "doc-header";
 let tbNum = 0;
 let defaultTbWidth = 0;
+let imageFlag = 0;
 $(document).ready(function () {
   $("#columns").change(function () {
     tbSetting_origin.columns = tbSetting.columns;
@@ -16,9 +17,9 @@ $(document).ready(function () {
     tbSetting.rows = _thisVal;
   });
 
-  $("#row_height").change(function () {
+  $("#table_height").change(function () {
     const _thisVal = $(this).val();
-    tbSetting.row_height = _thisVal;
+    tbSetting.table_height = _thisVal;
   });
 
   $("#table_width").change(function () {
@@ -82,6 +83,7 @@ $(document).ready(function () {
     reader.readAsDataURL(file);
 
     reader.onload = function () {
+      imageFlag = 1;
       $("#doc-background").attr("src", reader.result);
     };
     reader.onloadend = function () {
@@ -93,6 +95,10 @@ $(document).ready(function () {
   });
 
   $("#make_table").click(function () {
+    if( !imageFlag ) {
+      alert("Please Upload Image"); return;
+    }
+
     tbNum++;
     currDoc = "doc-table-" + tbNum;
     
@@ -168,7 +174,7 @@ function renderTable(tableSetting) {
 function getTableSetting() {
   tbSetting.columns = $("#columns").val();
   tbSetting.rows = $("#rows").val();
-  tbSetting.row_height = $("#row_height").val();
+  tbSetting.table_height = $("#table_height").val();
   tbSetting.table_width = $("#table_width").val();
   tbSetting.border_color = $("#border_color").val();
   tbSetting.border_width = $("#border_width").val();
@@ -182,7 +188,8 @@ function getTableSetting() {
 function setTableSetting(selectedDoc) {
   $("."+selectedDoc).width(tbSetting.table_width);
   $("."+selectedDoc+" .table").width("100%");
-  $("."+selectedDoc+" .table tr").css("height", tbSetting.row_height);
+  const tableHeight = tbSetting.table_height / tbSetting.rows;
+  $("."+selectedDoc+" .table tr").css("height", tableHeight);
   $("."+selectedDoc+" thead").css("color", tbSetting.header_color);
   $(
     "."+selectedDoc+" .table, ."+selectedDoc+" .table th, ."+selectedDoc+" .table tr, ."+selectedDoc+" .table td"
